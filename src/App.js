@@ -5,6 +5,7 @@ import Home from "./routes/Home";
 import Detail from "./routes/Detail";
 import Navigation from "./component/Navigation";
 import "./App.css";
+import Write from "./component/Write";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/" exact={true} component={Home} />
       <Route path="/about" component={About} />
       <Route path="/movie/:id" component={Detail} />
+      <Route path="/write_review" component={Write} />
     </HashRouter>
   );
 }

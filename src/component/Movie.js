@@ -9,6 +9,7 @@ function Movie({ id, year, title, summary, poster, genres }) {
       to={{
         pathname: `/movie/${id}`,
         state: {
+          id,
           year,
           title,
           summary,

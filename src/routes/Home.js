@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import Movie from "../component/Movie";
 import "./Home.css";
+import { dbService } from "../databaseConfig";
 
 class Home extends React.Component {
   state = {
@@ -32,6 +33,13 @@ class Home extends React.Component {
         ) : (
           <div className="movies">
             {movies.map((movie) => {
+              dbService
+                .doc(`Movie_Info/${movie.id}`)
+                .set({ ...movie })
+                .then(console.log("Success"))
+                .catch((err) => {
+                  console.log(err);
+                });
               return (
                 <Movie
                   key={movie.id}

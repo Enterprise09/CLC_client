@@ -1,8 +1,8 @@
 import axios from "axios";
 import React from "react";
-import { Table } from "react-bootstrap";
 import "./Detail.css";
 import "../sass/Detail.scss";
+import { Link } from "react-router-dom";
 
 class Detail extends React.Component {
   componentDidMount() {
@@ -20,7 +20,7 @@ class Detail extends React.Component {
   //<span>{location.state.title}</span>;
   render() {
     const { location } = this.props;
-    const { year, title, summary, poster, genres } = location.state;
+    const { id, year, title, summary, poster, genres } = location.state;
     if (location.state) {
       return (
         <>
@@ -66,7 +66,18 @@ class Detail extends React.Component {
                 <td className="count">2</td>
               </tr>
             </table>
-            <a className="write">write</a>
+            <Link
+              className="write"
+              to={{
+                pathname: `/write_review/${id}`,
+                state: {
+                  id,
+                  title,
+                },
+              }}
+            >
+              write
+            </Link>
           </div>
         </>
       );
