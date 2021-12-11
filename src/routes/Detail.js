@@ -73,7 +73,7 @@ class Detail extends React.Component {
                           {review.title}
                         </Link>
                       </td>
-                      <td>{review.content.slice(0, 60)}</td>
+                      <td>{review.content.slice(0, 30)}</td>
                     </tr>
                   ))}
                 </>
