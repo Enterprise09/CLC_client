@@ -1,0 +1,45 @@
+.detailReview_container {
+  width: 500px;
+  margin-top: 50px;
+  .update_form {
+    flex-direction: column;
+    width: 100%;
+
+    input,
+    textarea {
+      width: 100%;
+      margin: 10px;
+      font-size: large;
+      display: block;
+      padding: 7px;
+      border: 1px solid gray;
+      border-radius: 5px;
+    }
+
+    .content {
+      height: 300px;
+    }
+
+    .auth_button,
+    .delete_button,
+    .update_button {
+      font-weight: bold;
+      border: none;
+      font-size: larger;
+      color: white;
+      cursor: pointer;
+    }
+
+    .auth_button {
+      background-color: orange;
+    }
+
+    .delete_button {
+      background-color: tomato;
+    }
+
+    .update_button {
+      background-color: rgb(69, 134, 255);
+    }
+  }
+}

@@ -1,0 +1,27 @@
+.table {
+  width: 100%;
+
+  td,
+  th {
+    border: 1px solid gray;
+    padding: 7px;
+    font-size: large;
+  }
+
+  th {
+    text-align: center;
+  }
+
+  .reviewer_id {
+    text-align: center;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .count {
+    text-align: center;
+  }
+}
