@@ -1,26 +1,34 @@
-import axios from "axios";
 import React from "react";
+import { dbService } from "../databaseConfig";
 import "./Detail.css";
 import "../sass/Detail.scss";
 import { Link } from "react-router-dom";
 
 class Detail extends React.Component {
+  state = {
+    reviewArray: [],
+  };
+
   componentDidMount() {
-    console.log(this.props);
+    // console.log(this.props);
     const { location, history } = this.props;
     if (location.state === undefined) {
       history.push("/");
     }
+    dbService.collection("Review").onSnapshot((snapshot) => {
+      const reviewArray = snapshot.docs.map((doc) => ({
+        doc_id: doc.id,
+        ...doc.data(),
+      }));
+      this.setState({ reviewArray: reviewArray });
+    });
   }
-
-  onSubmit = () => {
-    axios.post();
-  };
 
   //<span>{location.state.title}</span>;
   render() {
     const { location } = this.props;
     const { id, year, title, summary, poster, genres } = location.state;
+    const { reviewArray } = this.state;
     if (location.state) {
       return (
         <>
@@ -38,33 +46,38 @@ class Detail extends React.Component {
               <p className="summary_box"> {summary} </p>
             </p>
             <table className="table">
-              <tr>
-                <th align="center">id</th>
-                <th align="center">title</th>
-                <th className="count" align="center">
-                  count
-                </th>
-              </tr>
-              <tr>
-                <td>ent</td>
-                <td>so funny!</td>
-                <td className="count">2</td>
-              </tr>
-              <tr>
-                <td>dkdkd</td>
-                <td>good for killing time</td>
-                <td className="count">5</td>
-              </tr>
-              <tr>
-                <td>jon</td>
-                <td>hello !!!</td>
-                <td className="count">1</td>
-              </tr>
-              <tr>
-                <td>jae</td>
-                <td>no time to die</td>
-                <td className="count">2</td>
-              </tr>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>TITLE</th>
+                  <th>SUMMARY</th>
+                </tr>
+              </thead>
+              <tbody>
+                <>
+                  {reviewArray.map((review) => (
+                    <tr>
+                      <td className="reviewer_id">{review.id}</td>
+                      <td>
+                        <Link
+                          to={{
+                            pathname: `/detail_review/${review.doc_id}`,
+                            state: {
+                              doc_id: review.doc_id,
+                              movie_id: id,
+                              title,
+                              review,
+                            },
+                          }}
+                        >
+                          {review.title}
+                        </Link>
+                      </td>
+                      <td>{review.content.slice(0, 40)}</td>
+                    </tr>
+                  ))}
+                </>
+              </tbody>
             </table>
             <Link
               className="write"
