@@ -17,35 +17,46 @@ const Write = (props) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    dbService
-      .collection("Review")
-      .add({
-        movie_id: state.state.id,
-        id,
-        pw,
-        title,
-        content,
-      })
-      .then((res) => {
-        alert("글을 저장하였습니다.");
-        history.push("/");
-      })
-      .catch((err) => {
-        alert("오류가 발생하였습니다." + err);
-      });
-
-    // axios({
-    //   url: "/api/write_review",
-    //   method: "post",
-    //   baseURL: "http://localhost:8089",
-    //   withCredentials: true,
-    // })
+    // dbService
+    //   .collection("Review")
+    //   .add({
+    //     movie_id: state.state.id,
+    //     id,
+    //     pw,
+    //     title,
+    //     content,
+    //   })
     //   .then((res) => {
-    //     console.log(res.data);
+    //     alert("글을 저장하였습니다.");
+    //     history.push("/");
     //   })
     //   .catch((err) => {
-    //     console.log(err);
+    //     alert("오류가 발생하였습니다." + err);
     //   });
+
+    axios({
+      url: "/api/write_review",
+      method: "post",
+      data: {
+        movieId: state.state.id,
+        id: id,
+        pw: pw,
+        title: title,
+        content: content,
+      },
+      baseURL: "http://localhost:8089",
+      withCredentials: true,
+    })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data === "ok") {
+          alert("저장되었습니다.");
+          history.push("/");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const onChange = (event) => {

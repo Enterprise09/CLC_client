@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Prev } from "react-bootstrap/esm/PageItem";
 import {
@@ -10,7 +11,7 @@ import "../sass/Detail_Review.scss";
 const Detail_Review = () => {
   const state = useLocation();
   const {
-    state: { review, doc_id },
+    state: { review, doc_id, movie_id },
   } = state;
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
@@ -59,15 +60,35 @@ const Detail_Review = () => {
       const ok = window.confirm("게시글을 삭제하시겠습니까?");
       if (ok) {
         console.log(doc_id);
-        dbService
-          .doc(`Review/${doc_id}`)
-          .delete()
+        // dbService
+        //   .doc(`Review/${doc_id}`)
+        //   .delete()
+        //   .then((res) => {
+        //     alert("삭제되었습니다.");
+        //     history.push("/");
+        //   })
+        //   .catch((err) => {
+        //     alert("삭제 중 오류가 발생하였습니다.");
+        //     console.log(err);
+        //   });
+
+        axios({
+          url: "/api/delete_review",
+          method: "post",
+          data: {
+            docId: doc_id,
+          },
+          baseURL: "http://localhost:8089",
+          withCredentials: true,
+        })
           .then((res) => {
-            alert("삭제되었습니다.");
-            history.push("/");
+            console.log(res.data);
+            if (res.data === "ok") {
+              alert("삭제되었습니다.");
+              history.push("/");
+            }
           })
           .catch((err) => {
-            alert("삭제 중 오류가 발생하였습니다.");
             console.log(err);
           });
       }
@@ -81,18 +102,43 @@ const Detail_Review = () => {
     if (auth) {
       const ok = window.confirm("수정하시겠습니까?");
       if (ok) {
-        dbService
-          .doc(`Review/${doc_id}`)
-          .update({
+        // dbService
+        //   .doc(`Review/${doc_id}`)
+        //   .update({
+        //     title: title,
+        //     content: content,
+        //   })
+        //   .then((res) => {
+        //     alert("수정되었습니다.");
+        //     history.push("/");
+        //   })
+        //   .catch((err) => {
+        //     alert("수정 중 오류가 발생하였습니다.");
+        //     console.log(err);
+        //   });
+
+        axios({
+          url: "/api/update_review",
+          method: "post",
+          data: {
+            docId: doc_id,
+            id: id,
+            pw: pw,
             title: title,
             content: content,
-          })
+            movieId: movie_id,
+          },
+          baseURL: "http://localhost:8089",
+          withCredentials: true,
+        })
           .then((res) => {
-            alert("수정되었습니다.");
-            history.push("/");
+            console.log(res.data);
+            if (res.data === "ok") {
+              alert("수정되었습니다.");
+              history.push("/");
+            }
           })
           .catch((err) => {
-            alert("수정 중 오류가 발생하였습니다.");
             console.log(err);
           });
       }
