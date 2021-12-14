@@ -90,6 +90,7 @@ const Detail_Review = () => {
           })
           .catch((err) => {
             console.log(err);
+            alert("서버와의 연결이 원할하지 않습니다.");
           });
       }
     } else {
@@ -140,6 +141,7 @@ const Detail_Review = () => {
           })
           .catch((err) => {
             console.log(err);
+            alert("서버와의 연결이 원할하지 않습니다.");
           });
       }
     } else {
