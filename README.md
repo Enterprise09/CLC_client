@@ -1,72 +1,41 @@
 # CLC - Cinema Lover Community
 
-# Getting Started with Create React App
+> Getting Started with Create React App<br />
+> This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 1. How to Start?
 
-## Available Scripts
+- download project
 
-In the project directory, you can run:
+  > git clone https://github.com/Enterprise09/CLC_client.git
+  > download .zip
 
-### `yarn start`
+- go to project folder and open with IDE
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  > recommend Visual Studio Code
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- install node_module
 
-### `yarn test`
+  > npm install
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- finally start react app
+  > npm start
 
-### `yarn build`
+## 2. Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- get movie information
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  > title, summary, cover image . . .
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- write some review with simple login
 
-### `yarn eject`
+- CRUD your review with simple authentication
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 3. Screens<br />
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<div style="margin-left: 25px">
+    <img src="https://user-images.githubusercontent.com/73864148/146341116-9cb05256-cee6-4f5f-897e-0ce55526d206.png" height="400px">
+    <img src="https://user-images.githubusercontent.com/73864148/146341125-7594c3b6-a461-4f1b-a899-f9bc6449f754.png" height="400px">
+    <img src="https://user-images.githubusercontent.com/73864148/146341127-6828e7f3-476b-4c98-b000-89a4098f4335.png" height="400px">
+    <img src="https://user-images.githubusercontent.com/73864148/146341129-0d2527cf-1b3d-4eaf-816d-489a6abc7a99.png" height="400px">
+</div>
