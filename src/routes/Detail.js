@@ -26,13 +26,16 @@ class Detail extends React.Component {
       this.setState({ reviewArray: reviewArray });
     });
 
-    // get review data from server
-    // const reviewArray = axios({
-    //   url: "/api/review",
-    //   method: "get",
-    //   baseURL: "http://localhost:8089",
-    //   withCredentials: true,
-    // });
+    // get review data from server - send movie_id to server
+    const reviewArray = axios({
+      url: "/api/review",
+      method: "get",
+      baseURL: "http://localhost:8089",
+      withCredentials: true,
+      data: {
+        movie_id: location.state.id,
+      },
+    });
   }
 
   //<span>{location.state.title}</span>;
