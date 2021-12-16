@@ -17,8 +17,7 @@ class Detail extends React.Component {
       history.push("/");
     }
 
-    // get review data from server
-    // temporary get from firebase collection
+    // temporary get review data from firebase collection
     dbService.collection("Review").onSnapshot((snapshot) => {
       const reviewArray = snapshot.docs.map((doc) => ({
         doc_id: doc.id,
@@ -27,20 +26,21 @@ class Detail extends React.Component {
       this.setState({ reviewArray: reviewArray });
     });
 
-    const reviewArray = axios({
-      url: "/api/review",
-      method: "get",
-      baseURL: "http://localhost:8089",
-      withCredentials: true,
-    });
+    // get review data from server
+    // const reviewArray = axios({
+    //   url: "/api/review",
+    //   method: "get",
+    //   baseURL: "http://localhost:8089",
+    //   withCredentials: true,
+    // });
   }
 
   //<span>{location.state.title}</span>;
   render() {
     const { location } = this.props;
-    const { id, year, title, summary, poster, genres } = location.state;
-    const { reviewArray } = this.state;
     if (location.state) {
+      const { id, year, title, summary, poster, genres } = location.state;
+      const { reviewArray } = this.state;
       return (
         <>
           <div className="detail_box">
