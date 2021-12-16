@@ -35,7 +35,7 @@ const Write = (props) => {
     //   });
 
     axios({
-      url: "/api/write_review",
+      url: "/api/review",
       method: "post",
       data: {
         movieId: state.state.id,
@@ -84,6 +84,7 @@ const Write = (props) => {
           type="text"
           placeholder="id"
           value={id}
+          required
         />
         <input
           name="pw"
@@ -91,6 +92,7 @@ const Write = (props) => {
           type="password"
           placeholder="pw"
           value={pw}
+          required
         />
         <input
           name="title"
@@ -98,6 +100,7 @@ const Write = (props) => {
           type="text"
           placeholder="title"
           value={title}
+          required
         />
         <textarea
           name="content"
@@ -106,6 +109,7 @@ const Write = (props) => {
           type="text"
           placeholder="content"
           value={content}
+          required
         />
         <input className="write_submit" type="submit" value="Submit" />
       </form>

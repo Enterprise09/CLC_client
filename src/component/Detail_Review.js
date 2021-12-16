@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Prev } from "react-bootstrap/esm/PageItem";
 import {
   useHistory,
   useLocation,
@@ -73,8 +72,8 @@ const Detail_Review = () => {
         //   });
 
         axios({
-          url: "/api/delete_review",
-          method: "post",
+          url: "/api/review",
+          method: "delete",
           data: {
             docId: doc_id,
           },
@@ -119,8 +118,8 @@ const Detail_Review = () => {
         //   });
 
         axios({
-          url: "/api/update_review",
-          method: "post",
+          url: "/api/review",
+          method: "put",
           data: {
             docId: doc_id,
             id: id,
@@ -152,13 +151,20 @@ const Detail_Review = () => {
   return (
     <div className="detailReview_container">
       <form className="update_form" onSubmit={onSubmit}>
-        <input name="title" type="text" onChange={onChange} value={title} />
+        <input
+          name="title"
+          type="text"
+          onChange={onChange}
+          value={title}
+          required
+        />
         <textarea
           className="content"
           name="content"
           type=""
           onChange={onChange}
           value={content}
+          required
         />
         <input
           name="id"
@@ -166,6 +172,7 @@ const Detail_Review = () => {
           onChange={onChange}
           value={id}
           placeholder="id"
+          required
         />
         <input
           name="pw"
@@ -173,6 +180,7 @@ const Detail_Review = () => {
           onChange={onChange}
           value={pw}
           placeholder="pw"
+          required
         />
         <input
           className="auth_button"

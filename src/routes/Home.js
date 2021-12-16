@@ -10,6 +10,7 @@ class Home extends React.Component {
   };
 
   getMovies = async () => {
+    // get data from server
     const {
       data: {
         data: { movies },
@@ -32,6 +33,7 @@ class Home extends React.Component {
           </div>
         ) : (
           <div className="movies">
+            {/* save temporary to firebase */}
             {movies.map((movie) => {
               dbService
                 .doc(`Movie_Info/${movie.id}`)
@@ -41,6 +43,7 @@ class Home extends React.Component {
                   console.log(err);
                 });
               return (
+                // display movie data
                 <Movie
                   key={movie.id}
                   id={movie.id}

@@ -3,6 +3,7 @@ import { dbService } from "../databaseConfig";
 import "./Detail.css";
 import "../sass/Detail.scss";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 class Detail extends React.Component {
   state = {
@@ -15,12 +16,22 @@ class Detail extends React.Component {
     if (location.state === undefined) {
       history.push("/");
     }
+
+    // get review data from server
+    // temporary get from firebase collection
     dbService.collection("Review").onSnapshot((snapshot) => {
       const reviewArray = snapshot.docs.map((doc) => ({
         doc_id: doc.id,
         ...doc.data(),
       }));
       this.setState({ reviewArray: reviewArray });
+    });
+
+    const reviewArray = axios({
+      url: "/api/review",
+      method: "get",
+      baseURL: "http://localhost:8089",
+      withCredentials: true,
     });
   }
 

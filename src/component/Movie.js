@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./Movie.css";
+import {
+  useHistory,
+  useLocation,
+} from "react-router-dom/cjs/react-router-dom.min";
 
 function Movie({ id, year, title, summary, poster, genres }) {
+  const history = useHistory();
+
+  useEffect(() => {
+    if (id === undefined || id === null) {
+      alert("올바르지 않은 접근 경로 입니다.\n홈으로 돌아갑니다.");
+      history.push("/");
+    }
+  }, []);
+
   return (
+    // Link to detail view with some state
     <Link
       to={{
         pathname: `/movie/${id}`,
@@ -37,6 +51,7 @@ function Movie({ id, year, title, summary, poster, genres }) {
   );
 }
 
+// check state value
 Movie.propTypes = {
   id: PropTypes.number.isRequired,
   year: PropTypes.number.isRequired,
