@@ -15,7 +15,17 @@ class Home extends React.Component {
       data: {
         data: { movies },
       },
-    } = await axios.get("https://yts.mx/api/v2/list_movies.json");
+    } = await axios({
+      baseURL: "http://localhost/8089",
+      url: "/api/v1/movies",
+      withCredentials: true,
+      method: "get",
+    });
+    // const {
+    //   data: {
+    //     data: { movies },
+    //   },
+    // } = await axios.get("https://yts.mx/api/v2/list_movies.json");
     this.setState({ movies, isLoading: false });
   };
 

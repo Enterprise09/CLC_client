@@ -18,13 +18,13 @@ class Detail extends React.Component {
     }
 
     // temporary get review data from firebase collection
-    dbService.collection("Review").onSnapshot((snapshot) => {
-      const reviewArray = snapshot.docs.map((doc) => ({
-        doc_id: doc.id,
-        ...doc.data(),
-      }));
-      this.setState({ reviewArray: reviewArray });
-    });
+    // dbService.collection("Review").onSnapshot((snapshot) => {
+    //   const reviewArray = snapshot.docs.map((doc) => ({
+    //     doc_id: doc.id,
+    //     ...doc.data(),
+    //   }));
+    //   this.setState({ reviewArray: reviewArray });
+    // });
 
     // get review data from server - send movie_id to server
     const reviewArray = axios({
@@ -36,6 +36,7 @@ class Detail extends React.Component {
         movie_id: location.state.id,
       },
     });
+    this.setState(reviewArray);
   }
 
   //<span>{location.state.title}</span>;
