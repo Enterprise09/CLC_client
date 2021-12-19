@@ -11,22 +11,27 @@ class Home extends React.Component {
 
   getMovies = async () => {
     // get data from server
-    const {
-      data: {
-        data: { movies },
-      },
-    } = await axios({
-      baseURL: "http://localhost/8089",
-      url: "/api/v1/movies",
+    await axios({
+      baseURL: "http://localhost:8089",
+      url: "/api/v2/movies",
       withCredentials: true,
       method: "get",
-    });
+    })
+      .then((res) => {
+        const {
+          data: { data },
+        } = res;
+        console.log(res);
+        this.setState({ movies: data, isLoading: false });
+      })
+      .catch((err) => {
+        console.log("ERR : ", err);
+      });
     // const {
     //   data: {
     //     data: { movies },
     //   },
     // } = await axios.get("https://yts.mx/api/v2/list_movies.json");
-    this.setState({ movies, isLoading: false });
   };
 
   componentDidMount() {
