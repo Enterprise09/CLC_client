@@ -10,12 +10,28 @@ class Home extends React.Component {
   };
 
   getMovies = async () => {
-    const {
-      data: {
-        data: { movies },
-      },
-    } = await axios.get("https://yts.mx/api/v2/list_movies.json");
-    this.setState({ movies, isLoading: false });
+    // get data from server
+    await axios({
+      baseURL: "http://localhost:8089",
+      url: "/api/v2/movies",
+      withCredentials: true,
+      method: "get",
+    })
+      .then((res) => {
+        const {
+          data: { data },
+        } = res;
+        console.log(res);
+        this.setState({ movies: data, isLoading: false });
+      })
+      .catch((err) => {
+        console.log("ERR : ", err);
+      });
+    // const {
+    //   data: {
+    //     data: { movies },
+    //   },
+    // } = await axios.get("https://yts.mx/api/v2/list_movies.json");
   };
 
   componentDidMount() {
@@ -32,6 +48,7 @@ class Home extends React.Component {
           </div>
         ) : (
           <div className="movies">
+            {/* save temporary to firebase */}
             {movies.map((movie) => {
               dbService
                 .doc(`Movie_Info/${movie.id}`)
@@ -41,6 +58,7 @@ class Home extends React.Component {
                   console.log(err);
                 });
               return (
+                // display movie data
                 <Movie
                   key={movie.id}
                   id={movie.id}

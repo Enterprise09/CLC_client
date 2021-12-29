@@ -1,8 +1,8 @@
 import React from "react";
-import { dbService } from "../databaseConfig";
 import "./Detail.css";
 import "../sass/Detail.scss";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 class Detail extends React.Component {
   state = {
@@ -10,26 +10,44 @@ class Detail extends React.Component {
   };
 
   componentDidMount() {
-    // console.log(this.props);
+    console.log(this.props);
     const { location, history } = this.props;
     if (location.state === undefined) {
       history.push("/");
+      return null;
     }
-    dbService.collection("Review").onSnapshot((snapshot) => {
-      const reviewArray = snapshot.docs.map((doc) => ({
-        doc_id: doc.id,
-        ...doc.data(),
-      }));
-      this.setState({ reviewArray: reviewArray });
-    });
+
+    //get review data from server
+    axios({
+      url: "/api/review",
+      method: "get",
+      baseURL: "http://localhost:8089",
+      withCredentials: true,
+      params: {
+        movieId: location.state.id,
+      },
+    })
+      .then((res) => {
+        const {
+          data: { data },
+        } = res;
+        console.log(data);
+        this.setState({ reviewArray: data });
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("서버와의 연결이 원할하지 않습니다.\n메인으로 돌아갑니다.");
+        history.push("/");
+        return null;
+      });
   }
 
   //<span>{location.state.title}</span>;
   render() {
     const { location } = this.props;
-    const { id, year, title, summary, poster, genres } = location.state;
-    const { reviewArray } = this.state;
     if (location.state) {
+      const { id, year, title, summary, poster, genres } = location.state;
+      const { reviewArray } = this.state;
       return (
         <>
           <div className="detail_box">
@@ -57,13 +75,13 @@ class Detail extends React.Component {
                 <>
                   {reviewArray.map((review) => (
                     <tr>
-                      <td className="reviewer_id">{review.id}</td>
+                      <td className="reviewer_id">{review.userId}</td>
                       <td>
                         <Link
                           to={{
-                            pathname: `/detail_review/${review.doc_id}`,
+                            pathname: `/detail_review/${review.docId}`,
                             state: {
-                              doc_id: review.doc_id,
+                              doc_id: review.docId,
                               movie_id: id,
                               title,
                               review,

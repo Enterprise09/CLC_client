@@ -17,25 +17,8 @@ const Write = (props) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    // dbService
-    //   .collection("Review")
-    //   .add({
-    //     movie_id: state.state.id,
-    //     id,
-    //     pw,
-    //     title,
-    //     content,
-    //   })
-    //   .then((res) => {
-    //     alert("글을 저장하였습니다.");
-    //     history.push("/");
-    //   })
-    //   .catch((err) => {
-    //     alert("오류가 발생하였습니다." + err);
-    //   });
-
     axios({
-      url: "/api/write_review",
+      url: "/api/review",
       method: "post",
       data: {
         movieId: state.state.id,
@@ -48,8 +31,8 @@ const Write = (props) => {
       withCredentials: true,
     })
       .then((res) => {
-        console.log(res.data);
-        if (res.data === "ok") {
+        console.log(res);
+        if (res.status === 201) {
           alert("저장되었습니다.");
           history.push("/");
         }
@@ -84,6 +67,7 @@ const Write = (props) => {
           type="text"
           placeholder="id"
           value={id}
+          required
         />
         <input
           name="pw"
@@ -91,6 +75,7 @@ const Write = (props) => {
           type="password"
           placeholder="pw"
           value={pw}
+          required
         />
         <input
           name="title"
@@ -98,6 +83,7 @@ const Write = (props) => {
           type="text"
           placeholder="title"
           value={title}
+          required
         />
         <textarea
           name="content"
@@ -106,6 +92,7 @@ const Write = (props) => {
           type="text"
           placeholder="content"
           value={content}
+          required
         />
         <input className="write_submit" type="submit" value="Submit" />
       </form>

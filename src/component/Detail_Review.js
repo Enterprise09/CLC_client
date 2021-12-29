@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Prev } from "react-bootstrap/esm/PageItem";
 import {
   useHistory,
   useLocation,
@@ -41,8 +40,8 @@ const Detail_Review = () => {
       alert("이미 인증되었습니다.");
       console.log(auth);
     } else {
-      if (review.id === id) {
-        if (review.pw === pw) {
+      if (review.userId === id) {
+        if (review.password === pw) {
           setAuth(true);
           alert("인증에 성공하였습니다.");
           console.log(auth);
@@ -60,30 +59,18 @@ const Detail_Review = () => {
       const ok = window.confirm("게시글을 삭제하시겠습니까?");
       if (ok) {
         console.log(doc_id);
-        // dbService
-        //   .doc(`Review/${doc_id}`)
-        //   .delete()
-        //   .then((res) => {
-        //     alert("삭제되었습니다.");
-        //     history.push("/");
-        //   })
-        //   .catch((err) => {
-        //     alert("삭제 중 오류가 발생하였습니다.");
-        //     console.log(err);
-        //   });
-
         axios({
-          url: "/api/delete_review",
-          method: "post",
+          baseURL: "http://localhost:8089",
+          url: "/api/review",
+          method: "delete",
+          withCredentials: true,
           data: {
             docId: doc_id,
           },
-          baseURL: "http://localhost:8089",
-          withCredentials: true,
         })
           .then((res) => {
-            console.log(res.data);
-            if (res.data === "ok") {
+            console.log(res);
+            if (res.status === 200) {
               alert("삭제되었습니다.");
               history.push("/");
             }
@@ -103,28 +90,11 @@ const Detail_Review = () => {
     if (auth) {
       const ok = window.confirm("수정하시겠습니까?");
       if (ok) {
-        // dbService
-        //   .doc(`Review/${doc_id}`)
-        //   .update({
-        //     title: title,
-        //     content: content,
-        //   })
-        //   .then((res) => {
-        //     alert("수정되었습니다.");
-        //     history.push("/");
-        //   })
-        //   .catch((err) => {
-        //     alert("수정 중 오류가 발생하였습니다.");
-        //     console.log(err);
-        //   });
-
         axios({
-          url: "/api/update_review",
-          method: "post",
+          url: "/api/review",
+          method: "put",
           data: {
             docId: doc_id,
-            id: id,
-            pw: pw,
             title: title,
             content: content,
             movieId: movie_id,
@@ -133,8 +103,8 @@ const Detail_Review = () => {
           withCredentials: true,
         })
           .then((res) => {
-            console.log(res.data);
-            if (res.data === "ok") {
+            console.log(res);
+            if (res.status === 200) {
               alert("수정되었습니다.");
               history.push("/");
             }
@@ -152,13 +122,20 @@ const Detail_Review = () => {
   return (
     <div className="detailReview_container">
       <form className="update_form" onSubmit={onSubmit}>
-        <input name="title" type="text" onChange={onChange} value={title} />
+        <input
+          name="title"
+          type="text"
+          onChange={onChange}
+          value={title}
+          required
+        />
         <textarea
           className="content"
           name="content"
           type=""
           onChange={onChange}
           value={content}
+          required
         />
         <input
           name="id"
@@ -166,6 +143,7 @@ const Detail_Review = () => {
           onChange={onChange}
           value={id}
           placeholder="id"
+          required
         />
         <input
           name="pw"
@@ -173,6 +151,7 @@ const Detail_Review = () => {
           onChange={onChange}
           value={pw}
           placeholder="pw"
+          required
         />
         <input
           className="auth_button"
