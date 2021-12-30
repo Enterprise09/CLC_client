@@ -1,5 +1,7 @@
 # CLC - Cinema Lover Community
 
+<img src="https://img.shields.io/badge/Node.js-15.14.01-orange"/>
+
 > Getting Started with Create React App<br />
 > This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
